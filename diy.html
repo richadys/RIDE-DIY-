@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-compatible "content=" IE=edge"> 
+  <meta name ="viewport"content=" width=device-width,initial-scale = 1.0">
+  <title>DIY</title>
+  <link rel=" stylesheet"href="style.css">
+  <script src="https://kit.fontawesome.com/9063885538.js" crossorigin="anonymous"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+<header>
+   <div id="header">
+  <div class="container"> 
+   <nav>
+    
+   <h1 class="logo">DIY TRANSPORT  </h1>
+        <ul id="sidemenu">
+          <li><a href=" #header" >HOME</a></li>
+        <li><a href=" #authform" > LOG IN </a></li> 
+        <li><a href=" #rides" > RIDES WITHIN ACCRA</a></li>
+        <li><a href=" #transport " >LONG JOURNEY RIDES</a></li>
+        <li><a href=" #option" >VEHICLE OPTIONS </a></li>
+        <li><a href=" #payment " >PAYMENT METHOD </a></li>
+        <i class="fa-solid fa-square-xmark"onclick="closemenu()" ></i>
+        </ul>
+        <i class="fa-solid fa-bars"onclick="openmenu()" ></i>
+   </nav>
+  <div class="header-text"> 
+    <H6> DIY TRANSPORT</H6> 
+      <h4> FAST,  RELIABLE  & EVERY WHERE </h4>
+  </div>
+ </div>
+ 
+
+    </div>
+ 
+    <div id = authform>   
+   <div class="container" id="authContainer">
+    <h2 id="formTitle">Login / Create Account</h2>
+    <form id="authForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Continue</button>
+        <div class="message" id="message"></div>
+    </form>
+</div>
+</div>
+
+<div class="container hidden" id="welcomeContainer">
+    <h2>Welcome to DIY Transport</h2>
+    <p class="welcome" id="welcomeMessage"></p>
+    <button class="logout" onclick="logout()">Log Out</button>
+</div>
+
+<script>
+    const authForm = document.getElementById('authForm');
+    const message = document.getElementById('message');
+    const authContainer = document.getElementById('authContainer');
+    const welcomeContainer = document.getElementById('welcomeContainer');
+    const welcomeMessage = document.getElementById('welcomeMessage');
+
+    // Check for saved login
+    const storedUser = localStorage.getItem('diy_username');
+    const storedPass = localStorage.getItem('diy_password');
+
+    if (storedUser && storedPass) {
+        showWelcome(storedUser);
+    }
+
+    authForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (username === '' || password === '') {
+            message.textContent = 'Please enter both username and password.';
+            return;
+        }
+
+        // Save to localStorage
+        localStorage.setItem('diy_username', username);
+        localStorage.setItem('diy_password', password);
+
+        showWelcome(username);
+    });
+
+    function showWelcome(username) {
+        authContainer.classList.add('hidden');
+        welcomeContainer.classList.remove('hidden');
+        welcomeMessage.textContent = `Hello, ${username}! You are now logged in.`;
+    }
+
+    function logout() {
+        localStorage.removeItem('diy_username');
+        localStorage.removeItem('diy_password');
+        location.reload();
+    }
+</script>
+
+
+ <div class="announcements">
+  <h2>📢 Announcements</h2>
+  <ul>
+    <li><strong>[12 May 2025]</strong> – VIP buses now available for evening trips to Kumasi.</li>
+    <li><strong>[11 May 2025]</strong> – Sprinter price reduced for off-peak hours (6am - 8am).</li>
+    <li><strong>[10 May 2025]</strong> – Mobile Money payments now accepted from AirtelTigo users!</li>
+  </ul>
+</div>
+
+    <h1>RIDES WITHIN ACCRA  </h1>
+</header>
+<div id = rides in accra ></div>
+<div class="container">
+    <h2>Search for a Ride</h2>
+    <form id="searchForm">
+        <label for="searchPickup">Pickup Location:</label>
+        <input type="text" id="searchPickup" name="searchPickup" required>
+
+        <label for="searchDestination">Destination:</label>
+        <input type="text" id="searchDestination" name="searchDestination" required>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="offerResponse" style="margin-top: 20px; font-size: 18px; font-weight: bold; color: green;"></div>
+
+</div>
+<script>
+  document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const pickup = document.getElementById('searchPickup').value.trim();
+    const destination = document.getElementById('searchDestination').value.trim();
+
+    if (pickup && destination) {
+      alert(`Searching for a ride from ${pickup} to ${destination}. Please wait while we find available drivers.`);
+    } else {
+      alert('Please enter both pickup and destination locations to search for a ride.');
+    }
+  });
+
+  document.getElementById('offerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const pickup = document.getElementById('offerPickup').value.trim();
+    const destination = document.getElementById('offerDestination').value.trim();
+
+    if (pickup && destination) {
+      alert(`🎉 Congratulations! Your ride from ${pickup} to ${destination} has been offered.\n\nPlease wait at the pickup point. CEO Jason will link a bus to you soon.`);
+    } else {
+      alert('Please fill in both the pickup and destination fields to offer a ride.');
+    }
+  });
+</script>
+
+   
+ 
+
+
+<h1> LONG JOURNEY RIDES </h1>
+<h>Choose Your Transport Option</h>
+
+
+
+<div id = transport type ></div>
+  <!-- Transport Option Selection -->
+  <label for="transportType">Select Transport Type:</label>
+  <select id="transportType">
+    <option value="">-- Select an option --</option>
+    <option value="VIP">VIP</option>
+    <option value="Metro Bus">Metro Bus</option>
+    <option value="Sprinter">Sprinter Car</option>
+  </select>
+
+  <!-- Display Price -->
+  <div class="price" id="priceDisplay"></div>
+
+  <!-- Confirmation Message -->
+  <div class="confirmation-message" id="confirmationMessage">
+    Your selection has been approved! CEO Jason will link a bus to you. Please be at a bus station to board.
+  </div>
+
+  <button type="button" onclick="clearSelection()">Clear Selection</button>
+</div>
+
+<script>
+  // Transport prices in GHS (Ghanaian Cedi)
+  const transportPrices = {
+    VIP: 150,   // VIP price in GHS
+    "Metro Bus": 120,  // Metro Bus price in GHS
+    Sprinter: 100,  // Sprinter Car price in GHS
+  };
+
+  const transportType = document.getElementById('transportType');
+  const priceDisplay = document.getElementById('priceDisplay');
+  const confirmationMessage = document.getElementById('confirmationMessage');
+
+  // Update price based on selected transport type
+  transportType.addEventListener('change', function() {
+    const selectedTransport = transportType.value;
+
+    if (selectedTransport) {
+      const price = transportPrices[selectedTransport];
+      priceDisplay.textContent = `Price: ₵${price}`;
+      showConfirmationMessage();
+    } else {
+      priceDisplay.textContent = '';
+      confirmationMessage.style.display = 'none'; // Hide confirmation if no option selected
+    }
+  });
+
+  // Show the confirmation message
+  function showConfirmationMessage() {
+    confirmationMessage.style.display = 'block';
+  }
+
+  // Clear selection function (resets the form)
+  function clearSelection() {
+    transportType.value = '';
+    priceDisplay.textContent = '';
+    confirmationMessage.style.display = 'none'; // Hide the confirmation message
+  }
+</script>
+</div>
+</div>
+
+<div id="option" >
+
+  <div class="container "data-aos="fade-down"  data-aos-duration="2500"  > 
+   <h1 class=" sub-title">VEHICLE OPTIONS </h1>
+   <div class="option-list"> 
+  <div class="option" >
+   <img src="image/metro  1.jpg" >
+    <div class="layer"> 
+      <h3>METRO MASS </h3>
+   <a href="#"> <i class="fa-solid fa-face-smile"></i></i></a>
+    </div>
+  </div>
+  
+  <div class="option"  >
+    <img src="image/sprinter 2.jpeg">
+   
+    <div class="layer"> 
+      <h3> SPRINTER  </h3>
+      <a href="#"> <i class="fa-solid fa-face-smile"></i></i></a>
+    </div>
+  </div>
+
+    <div class="option" >
+    <img src="bus 1.jpg">
+   
+    <div class="layer"> 
+      <h3>BUS </h3>
+      <a href="#"> <i class="fa-solid fa-face-smile"></i></i></a>
+    </div>
+  </div>
+
+    <div class="option" >
+    <img src="image/ports 1.jpeg">
+   
+    <div class="layer"> 
+      <h3>  PORTS  </h3>
+      <a href="#"> <i class="fa-solid fa-face-smile"></i></i></a>
+    </div>
+  </div>
+</div>
+</div>
+
+   <div id = payment form > 
+<h1> PAYMENT METHODS </h1>
+<div class="payment-container">
+  <h2>Make a Payment</h2> 
+  <form id="paymentForm">
+    <label for="paymentType">Select Payment Method:</label>
+    <select id="paymentType" required onchange="toggleFields()">
+      <option value="">-- Choose --</option>
+      <option value="momo">Mobile Money</option>
+      <option value="card">Card Payment</option>
+    </select>
+
+    <div id="sharedFields">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="amount">Amount (GHS):</label>
+      <input type="number" id="amount" required>
+    </div>
+
+    <div id="momoFields" class="hidden">
+      <label for="network">Mobile Network:</label>
+      <select id="network">
+        <option value="">-- Select Network --</option>
+        <option value="MTN">MTN</option>
+        <option value="Vodafone">Vodafone</option>
+        <option value="AirtelTigo">AirtelTigo</option>
+      </select>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" maxlength="10" placeholder="e.g. 0551234567">
+    </div>
+
+    <div id="cardFields" class="hidden">
+      <label for="cardNumber">Card Number:</label>
+      <input type="text" id="cardNumber" maxlength="16" placeholder="1234 5678 9012 3456">
+    </div>
+
+    <button type="submit">Pay Now</button>
+  </form>
+
+  <div id="paymentMessage" class="success-message"></div>
+</div>
+</div>
+
+<script>
+  function toggleFields() {
+    const type = document.getElementById('paymentType').value;
+    document.getElementById('momoFields').classList.add('hidden');
+    document.getElementById('cardFields').classList.add('hidden');
+
+    if (type === 'momo') {
+      document.getElementById('momoFields').classList.remove('hidden');
+    } else if (type === 'card') {
+      document.getElementById('cardFields').classList.remove('hidden');
+    }
+  }
+
+  document.getElementById('paymentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const amount = document.getElementById('amount').value.trim();
+    const type = document.getElementById('paymentType').value;
+    const message = document.getElementById('paymentMessage');
+
+    if (!name || !amount || !type) {
+      message.style.color = 'red';
+      message.textContent = 'Please complete all required fields.';
+      return;
+    }
+
+    if (type === 'momo') {
+      const network = document.getElementById('network').value;
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!network || !phone) {
+        message.style.color = 'red';
+        message.textContent = 'Please provide network and phone number for MoMo payment.';
+        return;
+      }
+
+      message.style.color = 'green';
+      message.innerHTML = `✅ Thank you <strong>${name}</strong>! Your MoMo payment of <strong>GHS ${amount}</strong> via <strong>${network}</strong> has been received.<br><br><span style="color: #d9534f; font-size: 20px;">Please wait at the station for your ride.</span>`;
+    } else if (type === 'card') {
+      const cardNumber = document.getElementById('cardNumber').value.trim();
+
+      if (!cardNumber) {
+        message.style.color = 'red';
+        message.textContent = 'Please provide a valid card number.';
+        return;
+      }
+
+      message.style.color = 'green';
+      message.innerHTML = `✅ Thank you <strong>${name}</strong>! Your card payment of <strong>GHS ${amount}</strong> has been received.<br><br><span style="color: #d9534f; font-size: 20px;">Please wait at the station for your ride.</span>`;
+    }
+  });
+</script>
+
+
+
+ <h2>Rate Your Ride</h2>
+  
+  <!-- Star Rating -->
+  <div class="stars" id="starRating">
+    <span data-rating="1">&#9733;</span>
+    <span data-rating="2">&#9733;</span>
+    <span data-rating="3">&#9733;</span>
+    <span data-rating="4">&#9733;</span>
+    <span data-rating="5">&#9733;</span>
+  </div>
+
+  <!-- Feedback Textarea -->
+  <label for="feedback">Write Feedback:</label>
+  <textarea id="feedback" placeholder="Tell us about your experience..."></textarea>
+
+  <button onclick="submitFeedback()">Submit Feedback</button>
+
+  <div class="thank-you" id="thankYouMessage"></div>
+</div>
+
+<script>
+  let selectedRating = 0;
+
+  const stars = document.querySelectorAll('#starRating span');
+  stars.forEach(star => {
+    star.addEventListener('click', function () {
+      selectedRating = parseInt(this.getAttribute('data-rating'));
+      updateStars(selectedRating);
+    });
+  });
+
+  function updateStars(rating) {
+    stars.forEach(star => {
+      const starRating = parseInt(star.getAttribute('data-rating'));
+      star.classList.toggle('active', starRating <= rating);
+    });
+  }
+
+  function submitFeedback() {
+    const feedback = document.getElementById('feedback').value.trim();
+    const message = document.getElementById('thankYouMessage');
+
+    if (selectedRating === 0 || feedback === "") {
+      message.style.color = "red";
+      message.textContent = "Please select a rating and write some feedback.";
+    } else {
+      message.style.color = "green";
+      message.innerHTML = `✅ Thank you for rating us <strong>${selectedRating} star(s)</strong>! We appreciate your feedback.`;
+    }
+  }
+</script>
+
+
+
+<div class="booking-form">
+  <h2>🚍 Book a Trip</h2>
+  <label for="pickup">Pickup Location:</label>
+  <input type="text" id="pickup">
+
+  <label for="destination">Destination:</label>
+  <input type="text" id="destination">
+
+  <label for="busType">Transport Type:</label>
+  <select id="busType">
+    <option value="">-- Select --</option>
+    <option value="VIP">VIP (GHS 80)</option>
+    <option value="Metro">Metro (GHS 40)</option>
+    <option value="Sprinter">Sprinter (GHS 50)</option>
+  </select>
+
+  <button onclick="generateSummary()">Generate Trip Summary</button>
+</div>
+
+<div class="trip-summary" id="tripSummary" style="display: none;">
+  <h2>🧾 Trip Summary</h2>
+  <p><strong>Pickup:</strong> <span id="summaryPickup"></span></p>
+  <p><strong>Destination:</strong> <span id="summaryDestination"></span></p>
+  <p><strong>Transport Type:</strong> <span id="summaryType"></span></p>
+  <p><strong>Fare:</strong> GHS <span id="summaryFare"></span></p>
+  <p><strong>Estimated Time:</strong> <span id="summaryTime"></span></p>
+  <p class="note">Please arrive at the terminal 15 minutes before departure.</p>
+</div>
+
+<div class="confirmation-message" id="confirmationMessage" style="display: none;">
+  <h2>🎉 Thank You for Booking!</h2>
+  <p>Dear traveler, your trip from <strong id="msgPickup"></strong> to <strong id="msgDestination"></strong> has been successfully booked.</p>
+  <p>🚌 A <strong id="msgBusType"></strong> bus will be assigned shortly.</p>
+  <p style="color: green; font-size: 18px;"><strong>✅ Please wait at the station. CEO Jason will link your ride.</strong></p>
+  <p class="safe-text">🛡️ We wish you a <strong>safe and pleasant journey!</strong></p>
+</div>
+
+<script>
+  function generateSummary() {
+    const pickup = document.getElementById("pickup").value;
+    const destination = document.getElementById("destination").value;
+    const busType = document.getElementById("busType").value;
+
+    const fareMap = {
+      VIP: 80,
+      Metro: 40,
+      Sprinter: 50
+    };
+
+    const timeMap = {
+      VIP: "5 hrs",
+      Metro: "6 hrs",
+      Sprinter: "4.5 hrs"
+    };
+
+    if (pickup && destination && busType) {
+      // Fill trip summary
+      document.getElementById("summaryPickup").textContent = pickup;
+      document.getElementById("summaryDestination").textContent = destination;
+      document.getElementById("summaryType").textContent = busType;
+      document.getElementById("summaryFare").textContent = fareMap[busType];
+      document.getElementById("summaryTime").textContent = timeMap[busType];
+      document.getElementById("tripSummary").style.display = "block";
+
+      // Fill thank-you message
+      document.getElementById("msgPickup").textContent = pickup;
+      document.getElementById("msgDestination").textContent = destination;
+      document.getElementById("msgBusType").textContent = busType;
+      document.getElementById("confirmationMessage").style.display = "block";
+    } else {
+      alert("Please fill all fields to generate your trip summary.");
+    }
+  }
+</script>
+
+
+
+
+<div class="appreciation-box">
+  <img src="ceo.jpg" alt="CEO Jason" class="ceo-photo">
+  <h2>🙏 Thank You!</h2>
+  <p>We appreciate you for choosing <strong>DIY Transport</strong> for your journey.</p>
+  <p>Our team is committed to providing you with safe, reliable, and comfortable rides.</p>
+  <p class="cheers">✨ Travel well — and see you again soon!</p>
+  <p class="ceo-sign">Jason, CEO</p>
+</div>
+
+  <div class="copyright" >
+    <P>Copyright © NANA YAW JASON  <i class="fa-solid fa-heart"></i>  </P>
+  </div>
+  </div>
+
+
+
+
+
+<script> 
+
+
+
+  var tablinks = document.getElementsByClassName("tab-links");
+  var tabcontents= document.getElementsByClassName("tab-contents");
+
+  function opentab(tabname){
+   for( tablink of tablinks){ 
+        tablink.classList.remove("active-link");
+  }
+    for(tabcontent of tabcontents){ 
+        tabcontent.classList.remove("active-tab");
+    }
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
+  }
+  
+  </script>
+  <script> 
+  
+  var sidemeu = document.getElementById("sidemenu");
+
+   function openmenu(){ 
+    sidemeu.style.right="0";
+   }
+      function closemenu(){ 
+        sidemeu.style.right = "-200px";
+    }
+
+ 
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>
